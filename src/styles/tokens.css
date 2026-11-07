@@ -1,0 +1,100 @@
+/* ==========================================================================
+   SEAIR design tokens
+   One palette, three worlds: Sky (atmosphere) · Surface · Deep Blue.
+   ========================================================================== */
+:root {
+  /* --- Core palette --------------------------------------------------- */
+  --deep-ocean: #073b4c;
+  --ocean-teal: #087e8b;
+  --lagoon: #18a6a6;
+  --sea-glass: #70d6ce;
+  --sea-foam: #e9f7f2;
+  --sand: #f4d6a0;
+  --coral: #ff927e;
+  --sky: #a8dff0;
+  --cloud: #f8fcfa;
+
+  /* --- Derived shades (kept inside the palette's hue family) ---------- */
+  --abyss: #04293a;
+  --deep-ocean-2: #0a4d61;
+  --sky-deep: #2b8fb8; /* air data series on light backgrounds */
+  --sky-soft: #d6f0f7;
+  --sand-deep: #d9b26c;
+  --coral-deep: #e5654f; /* warnings with enough contrast for text */
+  --sun: #ffd98a;
+
+  /* --- Semantic -------------------------------------------------------- */
+  --ink: var(--deep-ocean);
+  --ink-soft: #3d6672;
+  --ink-mute: #6b8d96;
+  --on-dark: #f8fcfa;
+  --on-dark-soft: #b9dfe0;
+  --line: rgba(7, 59, 76, 0.12);
+  --line-dark: rgba(248, 252, 250, 0.16);
+  --surface: #ffffff;
+  --surface-tint: var(--sea-foam);
+  --focus: #ff927e;
+
+  /* ISPU categories (PermenLHK P.14/2020 colour convention, softened) */
+  --ispu-good: #3fae6a;
+  --ispu-moderate: #3b8fd9;
+  --ispu-unhealthy: #f2c230;
+  --ispu-very: #e5533d;
+  --ispu-hazard: #2d2d2d;
+
+  /* Ocean status (indicative, see data/parameters.js) */
+  --status-good: #2fae8f;
+  --status-watch: #f2b84b;
+  --status-poor: #e5654f;
+
+  /* --- Typography ------------------------------------------------------ */
+  --font-display: 'Fredoka', 'Nunito', system-ui, sans-serif;
+  --font-body: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --fs-xl: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem);
+  --fs-2xl: clamp(2.1rem, 1.4rem + 3vw, 3.6rem);
+  --fs-hero: clamp(2.6rem, 1.4rem + 5.2vw, 5.6rem);
+
+  /* --- Shape & depth --------------------------------------------------- */
+  --r-sm: 10px;
+  --r-md: 18px;
+  --r-lg: 28px;
+  --r-xl: 40px;
+  --r-pill: 999px;
+  --r-blob: 46% 54% 52% 48% / 48% 44% 56% 52%;
+
+  --shadow-sm: 0 2px 6px rgba(7, 59, 76, 0.08);
+  --shadow-md: 0 10px 30px -10px rgba(7, 59, 76, 0.25);
+  --shadow-lg: 0 30px 60px -24px rgba(7, 59, 76, 0.35);
+  --shadow-pop: 0 6px 0 rgba(7, 59, 76, 0.12); /* cartoon "sticker" shadow */
+
+  --glass: rgba(248, 252, 250, 0.62);
+  --glass-dark: rgba(7, 59, 76, 0.42);
+  --glass-border: rgba(255, 255, 255, 0.55);
+
+  /* --- Spacing & layout ------------------------------------------------ */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4.5rem;
+  --s-9: 7rem;
+
+  --container: 1200px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --nav-h: 72px;
+
+  /* --- Motion ---------------------------------------------------------- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --t-fast: 160ms;
+  --t-med: 320ms;
+}

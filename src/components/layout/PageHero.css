@@ -1,0 +1,129 @@
+.page-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: clamp(440px, 62vh, 620px);
+  padding: calc(var(--nav-h) + var(--s-7)) 0 var(--s-8);
+  display: flex;
+  align-items: center;
+  touch-action: pan-y;
+}
+.page-hero__art {
+  position: absolute;
+  inset: 0;
+}
+.page-hero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.page-hero__inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: var(--s-6);
+  align-items: end;
+  pointer-events: none;
+}
+.page-hero__inner > * {
+  pointer-events: auto;
+}
+.page-hero h1 {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  max-width: 16ch;
+}
+.page-hero__lede {
+  font-size: var(--fs-md);
+  max-width: 52ch;
+  font-weight: 600;
+}
+
+/* Sky */
+.page-hero--sky {
+  background: linear-gradient(180deg, #8fd3ea 0%, var(--sky) 50%, var(--cloud) 100%);
+}
+.page-hero--sky .page-hero__lede {
+  color: var(--ink-soft);
+}
+.page-hero__sun {
+  position: absolute;
+  right: 8%;
+  top: 14%;
+  width: clamp(120px, 14vw, 200px);
+}
+
+/* Deep */
+.page-hero--deep {
+  background: linear-gradient(180deg, var(--lagoon) 0%, var(--ocean-teal) 50%, var(--deep-ocean) 100%);
+  color: var(--on-dark);
+}
+.page-hero--deep .eyebrow {
+  color: var(--sea-glass);
+}
+.page-hero--deep .page-hero__lede {
+  color: var(--on-dark-soft);
+}
+.page-hero__weed,
+.page-hero__coral {
+  position: absolute;
+  bottom: -6px;
+}
+.page-hero__weed--1 {
+  right: 8%;
+}
+.page-hero__weed--2 {
+  right: 26%;
+}
+.page-hero__coral {
+  right: 15%;
+  width: 120px;
+}
+
+/* Surface */
+.page-hero--surface {
+  background: linear-gradient(180deg, var(--sky) 0%, var(--cloud) 75%);
+}
+.page-hero__sun--low {
+  top: 26%;
+  right: 12%;
+  width: clamp(110px, 12vw, 170px);
+}
+.page-hero__waves {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 48%;
+}
+.page-hero--surface .page-hero__inner {
+  align-self: flex-start;
+}
+.page-hero--surface .page-hero__copy {
+  padding-bottom: 18vh;
+}
+.page-hero--surface .page-hero__lede {
+  color: var(--ink-soft);
+}
+
+.page-hero__aside {
+  justify-self: end;
+  width: 100%;
+  max-width: 380px;
+}
+
+@media (max-width: 860px) {
+  .page-hero__inner {
+    grid-template-columns: 1fr;
+  }
+  .page-hero__aside {
+    justify-self: start;
+  }
+  .page-hero--surface .page-hero__copy {
+    padding-bottom: 0;
+  }
+  .page-hero--surface {
+    padding-bottom: 32vh;
+  }
+}

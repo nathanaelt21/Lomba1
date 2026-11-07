@@ -1,0 +1,500 @@
+/* ==========================================================================
+   Hero journey: one pinned stage, a 3-screen-tall illustrated world.
+   World coordinates (% of world height, H = one screen):
+     sky       0%    → 26%   (waterline at 24% = 0.72H)
+     surface   20.67%→ 30%   (wave canvas)
+     under     26%   → 100%
+   ========================================================================== */
+.journey {
+  position: relative;
+  background: var(--abyss);
+}
+.journey__stage {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 560px;
+  overflow: hidden;
+  background: var(--sky);
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.journey__world {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 300%;
+  will-change: transform;
+}
+
+/* ---------- Sky ---------- */
+.world-sky {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 26%;
+  background: linear-gradient(180deg, #8fd3ea 0%, var(--sky) 30%, #d4eff7 70%, var(--cloud) 92%);
+  overflow: hidden;
+}
+.world-sky::after {
+  /* soft sunlight bloom that breathes slowly */
+  content: '';
+  position: absolute;
+  right: -10%;
+  top: -20%;
+  width: 70%;
+  height: 90%;
+  background: radial-gradient(closest-side, rgba(255, 217, 138, 0.45), rgba(255, 217, 138, 0));
+  animation: sun-breathe 9s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes sun-breathe {
+  from {
+    opacity: 0.6;
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-3%, 4%) scale(1.08);
+  }
+}
+.world-sun {
+  position: absolute;
+  right: 9%;
+  top: 9%;
+  width: clamp(120px, 15vw, 230px);
+  z-index: 1;
+}
+.world-clouds {
+  position: absolute;
+  inset: 0;
+}
+.world-clouds--back {
+  z-index: 0;
+  opacity: 0.9;
+}
+.world-clouds--front {
+  z-index: 2;
+}
+.world-birds {
+  position: absolute;
+  top: 26%;
+  display: flex;
+  flex-direction: column;
+  animation: drift 70s linear infinite;
+  animation-delay: -25s;
+  z-index: 1;
+}
+
+/* ---------- Horizon ---------- */
+.world-horizon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 76%;
+  height: 0;
+  z-index: 1;
+}
+.world-horizon__inner {
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  transform: translateX(-50%);
+  width: max(100%, 980px);
+  aspect-ratio: 1200 / 140;
+}
+.world-horizon__inner .ill-skyline {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- Surface ---------- */
+.world-surface {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 20.667%;
+  height: 9.333%;
+  z-index: 3;
+}
+.world-surface__canvas {
+  width: 100%;
+  height: 100%;
+}
+.world-floater {
+  position: absolute;
+  top: 0;
+  width: clamp(80px, 9vw, 130px);
+  will-change: transform;
+}
+.world-floater--buoy {
+  width: clamp(42px, 4.5vw, 64px);
+}
+.world-floater .hotspot {
+  position: absolute;
+}
+
+/* ---------- Underwater ---------- */
+.world-under {
+  position: absolute;
+  inset: 26% 0 0 0;
+  overflow: hidden;
+  z-index: 2;
+  background: linear-gradient(
+    180deg,
+    var(--lagoon) 0%,
+    #12939a 14%,
+    var(--ocean-teal) 32%,
+    #0a5f70 55%,
+    var(--deep-ocean) 78%,
+    var(--abyss) 100%
+  );
+}
+.world-rays {
+  height: 50%;
+  bottom: auto;
+}
+.world-under .swim {
+  left: 0;
+  z-index: 1;
+}
+.world-reef {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 30%;
+  z-index: 2;
+}
+.reef-back,
+.reef-front {
+  position: absolute;
+  inset: 0;
+}
+.reef-back > *,
+.reef-front > * {
+  position: absolute;
+  bottom: 0;
+}
+.reef-sand {
+  left: -5%;
+  right: -5%;
+  height: 90px;
+  background: var(--sand);
+  border-radius: 50% 50% 0 0 / 60px 60px 0 0;
+  box-shadow: inset 0 14px 0 rgba(255, 255, 255, 0.25);
+}
+.reef-rock--1 {
+  left: -2%;
+  width: clamp(200px, 26vw, 360px);
+  bottom: 60px;
+}
+.reef-rock--2 {
+  right: 4%;
+  width: clamp(180px, 22vw, 300px);
+  bottom: 60px;
+}
+.reef-fan {
+  right: 18%;
+  width: clamp(120px, 12vw, 180px);
+  bottom: 70px;
+}
+.reef-weed--1 {
+  left: 40%;
+  bottom: 60px;
+}
+.reef-coral--1 {
+  left: 12%;
+  width: clamp(110px, 11vw, 160px);
+  bottom: 50px;
+}
+.reef-coral--2 {
+  right: 32%;
+  width: clamp(90px, 9vw, 130px);
+  bottom: 54px;
+}
+.reef-brain {
+  left: 26%;
+  width: clamp(110px, 11vw, 160px);
+  bottom: 40px;
+}
+.reef-weed--2 {
+  left: 6%;
+  bottom: 40px;
+}
+.reef-weed--3 {
+  right: 10%;
+  bottom: 40px;
+}
+.reef-front .hotspot {
+  position: absolute;
+}
+
+/* ---------- Screen-fixed layers ---------- */
+.journey__wind {
+  position: absolute;
+  inset: 0 0 auto 0;
+  width: 100%;
+  height: 74%;
+  z-index: 4;
+  pointer-events: none;
+}
+.journey__shade {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(ellipse 120% 90% at 50% 10%, rgba(4, 41, 58, 0) 30%, rgba(4, 41, 58, 0.95) 100%);
+}
+.journey__copy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--nav-h) + clamp(16px, 5vh, 56px));
+  z-index: 6;
+  pointer-events: none;
+}
+.journey__copy > * {
+  pointer-events: auto;
+}
+.journey__title {
+  font-size: clamp(2.3rem, min(6.4vw, 8.2vh), 5.6rem);
+  font-weight: 700;
+  max-width: 15ch;
+  margin: clamp(12px, 3vh, 28px) 0 clamp(8px, 2vh, 16px);
+  color: var(--deep-ocean);
+  text-shadow: 0 2px 0 rgba(248, 252, 250, 0.6);
+}
+.journey__title span {
+  color: var(--ocean-teal);
+}
+.journey__lede {
+  font-size: clamp(1rem, 0.6rem + 1.3vh, 1.4rem);
+  margin-bottom: 0;
+  max-width: 34ch;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+.journey__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: clamp(14px, 3vh, 28px);
+}
+.journey__actions .btn--ghost {
+  color: var(--deep-ocean);
+  background: rgba(248, 252, 250, 0.5);
+}
+.journey__hint {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: var(--s-5);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+.journey__hint span {
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  background: rgba(248, 252, 250, 0.6);
+  border: 1px dashed rgba(7, 59, 76, 0.25);
+}
+
+.journey__caption {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  text-align: center;
+  color: var(--on-dark);
+  width: min(640px, calc(100% - 2 * var(--gutter)));
+  opacity: 0;
+  pointer-events: none;
+}
+.caption-1 {
+  top: 40%;
+}
+.caption-1 p {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: 600;
+  text-shadow: 0 4px 20px rgba(4, 41, 58, 0.4);
+}
+.caption-1 .eyebrow,
+.caption-2 .eyebrow {
+  color: var(--sea-glass);
+  justify-content: center;
+}
+.caption-2 {
+  top: 18%;
+  width: min(600px, calc(100% - 2 * var(--gutter) - 180px));
+}
+@media (max-width: 720px) {
+  .caption-2 {
+    width: calc(100% - 2 * var(--gutter));
+  }
+}
+.caption-2 h2 {
+  font-size: var(--fs-2xl);
+}
+.caption-2 p {
+  color: var(--on-dark-soft);
+  font-size: var(--fs-md);
+}
+
+/* Depth gauge */
+.depth-gauge {
+  position: absolute;
+  right: clamp(12px, 2.5vw, 32px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 6;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 12px 10px;
+  border-radius: var(--r-pill);
+  background: rgba(248, 252, 250, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  font-family: var(--font-display);
+  color: var(--deep-ocean);
+  width: 74px;
+}
+.depth-gauge__label {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+.depth-gauge__value {
+  font-size: 15px;
+  font-weight: 700;
+}
+.depth-gauge__track {
+  position: relative;
+  width: 8px;
+  height: 160px;
+  margin-top: 6px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, var(--sky) 0 36%, var(--lagoon) 36% 60%, var(--deep-ocean) 100%);
+}
+.depth-gauge__water {
+  position: absolute;
+  left: -6px;
+  right: -6px;
+  height: 2px;
+  background: var(--cloud);
+}
+.depth-gauge__marker {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--coral);
+  border: 3px solid var(--cloud);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Scroll cue */
+.journey__cue {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(14px, 3vh, 30px);
+  transform: translateX(-50%);
+  z-index: 6;
+  border: 0;
+  background: none;
+  color: var(--cloud);
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: var(--fs-xs);
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  text-shadow: 0 1px 6px rgba(7, 59, 76, 0.4);
+}
+.journey__cue-mouse {
+  width: 24px;
+  height: 38px;
+  border-radius: 14px;
+  border: 2.5px solid currentColor;
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+}
+.journey__cue-mouse span {
+  width: 4px;
+  height: 8px;
+  border-radius: 4px;
+  background: currentColor;
+  animation: cue 1.8s var(--ease-out) infinite;
+}
+@keyframes cue {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+}
+
+.burst-bubble {
+  position: absolute;
+  z-index: 5;
+  border-radius: 50%;
+  border: 2px solid rgba(248, 252, 250, 0.85);
+  background: radial-gradient(circle at 32% 30%, rgba(255, 255, 255, 0.9) 0 18%, rgba(255, 255, 255, 0.1) 22%);
+  pointer-events: none;
+  margin: -8px 0 0 -8px;
+}
+
+@media (max-width: 720px) {
+  .depth-gauge {
+    display: none;
+  }
+  .journey__copy {
+    top: calc(var(--nav-h) + 8px);
+  }
+  .journey__title {
+    font-size: clamp(2rem, 9.5vw, 2.6rem);
+    margin: 14px 0 8px;
+  }
+  .journey__lede {
+    font-size: 1rem;
+    max-width: 30ch;
+  }
+  .journey__actions {
+    margin-top: 16px;
+  }
+  .journey__actions .btn--ghost {
+    display: none;
+  }
+  .status-pill {
+    font-size: var(--fs-xs);
+    gap: 4px 10px;
+    padding: 6px 8px 6px 10px;
+  }
+  .status-pill__time {
+    display: none;
+  }
+  .journey__hint {
+    display: none;
+  }
+  .world-sun {
+    right: 4%;
+    top: 4%;
+  }
+}
+@media (max-height: 820px) and (min-width: 721px) {
+  .journey__hint {
+    display: none;
+  }
+}

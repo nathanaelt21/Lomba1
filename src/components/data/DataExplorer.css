@@ -1,0 +1,134 @@
+.explorer {
+  display: grid;
+  gap: var(--s-5);
+}
+.explorer__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--s-4);
+}
+.explorer__controls .segmented {
+  align-self: flex-end;
+}
+.explorer__controls .field select,
+.explorer__controls .field input {
+  min-width: 170px;
+}
+.explorer__params .chip {
+  font-size: var(--fs-sm);
+}
+.explorer__panel {
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
+  padding: clamp(18px, 3vw, 32px);
+  display: grid;
+  gap: var(--s-5);
+  position: relative;
+  overflow: hidden;
+}
+.explorer__panel::before {
+  content: '';
+  position: absolute;
+  right: -60px;
+  top: -60px;
+  width: 200px;
+  height: 200px;
+  border-radius: var(--r-blob);
+  background: var(--sea-foam);
+  z-index: 0;
+}
+.explorer__panel > * {
+  position: relative;
+}
+.explorer__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+.explorer__head h3 {
+  font-size: var(--fs-lg);
+  margin-bottom: 6px;
+}
+.explorer__head h3 span {
+  color: var(--ink-mute);
+  font-weight: 500;
+}
+.explorer__head p {
+  max-width: 60ch;
+  margin: 0;
+}
+.explorer__badges {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.explorer__stats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+.explorer__chart {
+  min-height: 320px;
+  transition: opacity var(--t-med);
+}
+.explorer__chart.is-loading {
+  opacity: 0.5;
+}
+.explorer__error {
+  color: var(--coral-deep);
+  font-weight: 700;
+}
+.chart-box {
+  position: relative;
+  width: 100%;
+}
+
+/* Dark variant: controls sit on an underwater background */
+.explorer--dark > .explorer__controls,
+.explorer--dark > .explorer__params {
+  color: var(--on-dark);
+}
+.explorer--dark .field {
+  color: var(--on-dark-soft);
+}
+.explorer--dark .segmented {
+  background: rgba(248, 252, 250, 0.12);
+}
+.explorer--dark .segmented button {
+  color: var(--on-dark-soft);
+}
+.explorer--dark .segmented button[aria-pressed='true'] {
+  background: var(--cloud);
+  color: var(--deep-ocean);
+}
+.explorer--dark > .explorer__params .chip,
+.explorer--dark > .explorer__controls .chip {
+  background: rgba(248, 252, 250, 0.08);
+  border-color: rgba(248, 252, 250, 0.2);
+  color: var(--on-dark);
+}
+.explorer--dark > .explorer__params .chip[aria-pressed='true'],
+.explorer--dark > .explorer__controls .chip[aria-pressed='true'] {
+  background: var(--coral);
+  border-color: var(--coral);
+  color: var(--deep-ocean);
+}
+
+@media (max-width: 760px) {
+  .explorer__stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .explorer__controls .field,
+  .explorer__controls .field select,
+  .explorer__controls .field input {
+    width: 100%;
+    min-width: 0;
+  }
+  .explorer__controls > .field {
+    flex: 1 1 140px;
+  }
+}
