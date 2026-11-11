@@ -5,6 +5,9 @@ import Icon from '../../components/ui/Icon.jsx';
 import { PATHWAYS } from '../../data/pathways.js';
 import { getParameter } from '../../data/parameters.js';
 
+/** How long each step stays on screen while the journey plays. */
+const STEP_MS = 4200;
+
 export function CausationNote({ className = '' }) {
   return (
     <aside className={`causation-note ${className}`} data-reveal>
@@ -12,7 +15,7 @@ export function CausationNote({ className = '' }) {
         <Icon name="info" />
       </span>
       <div>
-        <h3>Korelasi bukan berarti sebab-akibat</h3>
+        <h3>Correlation is not causation</h3>
         <p>
           Ketika data udara dan laut naik-turun bersamaan, itu saja belum membuktikan bahwa yang satu menyebabkan yang lain.
           Musim, hujan, dan sungai sering memengaruhi keduanya sekaligus. SEAIR menampilkan polanya berdampingan dan menjelaskan
@@ -37,7 +40,7 @@ export default function ConnectionSection() {
     const id = setTimeout(() => {
       if (idx >= PATHWAYS.length - 1) setPlaying(false);
       else setActive(PATHWAYS[idx + 1].key);
-    }, 3800);
+    }, STEP_MS);
     return () => clearTimeout(id);
   }, [playing, idx]);
 
@@ -56,7 +59,7 @@ export default function ConnectionSection() {
 
         <div className="connection__grid">
           <div className="connection__visual" data-reveal="left">
-            <ConnectionDiagram active={active} onSelect={pick} />
+            <ConnectionDiagram active={active} onSelect={pick} playing={playing} />
             <div className="connection__controls">
               <button
                 className="btn btn--sm"
@@ -66,13 +69,22 @@ export default function ConnectionSection() {
                 }}
               >
                 <Icon name={playing ? 'pause' : 'play'} size={16} />
-                {playing ? 'Jeda' : 'Putar perjalanan'}
+                {playing ? 'Pause' : idx === PATHWAYS.length - 1 ? 'Replay the journey' : 'Play the journey'}
               </button>
-              <div className="connection__progress" aria-hidden="true">
+              <div
+                className={`connection__progress ${playing ? 'is-playing' : ''}`}
+                style={{ '--step-ms': `${STEP_MS}ms` }}
+                aria-hidden="true"
+              >
                 {PATHWAYS.map((p, i) => (
-                  <span key={p.key} className={i <= idx ? 'is-done' : ''} />
+                  <span key={p.key} className={i < idx ? 'is-done' : i === idx ? 'is-current' : ''}>
+                    {i === idx && <i key={`${active}-${playing}`} />}
+                  </span>
                 ))}
               </div>
+              <span className="connection__count" aria-live="polite">
+                Step {idx + 1}/{PATHWAYS.length}
+              </span>
             </div>
           </div>
 

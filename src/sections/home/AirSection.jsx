@@ -37,7 +37,7 @@ export default function AirSection() {
           </header>
           <div className="card card--glass air-section__ispu" data-reveal>
             <div className="air-section__ispu-head">
-              <h3>Skala ISPU</h3>
+              <h3>ISPU scale</h3>
               <DemoBadge compact />
             </div>
             <IspuScale value={v('ispu')} />
@@ -47,7 +47,7 @@ export default function AirSection() {
             </p>
           </div>
           <Link to="/air" className="btn" data-reveal>
-            Pelajari kualitas udara <Icon name="arrow" size={18} />
+            Learn about air quality <Icon name="arrow" size={18} />
           </Link>
         </div>
 

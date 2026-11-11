@@ -209,6 +209,18 @@
 .air-section__ispu {
   width: 100%;
   padding: var(--s-5);
+  display: grid;
+  gap: var(--s-4);
+}
+.air-section__ispu > * {
+  margin: 0;
+}
+.air-section__ispu .ispu-scale {
+  margin: 0;
+}
+.air-section__ispu .tiny {
+  padding-top: var(--s-3);
+  border-top: 1px dashed rgba(7, 59, 76, 0.15);
 }
 .air-section__ispu-head {
   display: flex;
@@ -354,6 +366,19 @@
 .ispu-scale {
   margin: var(--s-4) 0 var(--s-3);
 }
+/* Leave headroom for the value bubble so it never sits on the card title. */
+.ispu-scale--marked {
+  padding-top: 34px;
+}
+.ispu-scale__ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--ink-mute);
+  font-variant-numeric: tabular-nums;
+}
 .ispu-scale__bar {
   position: relative;
   display: flex;
@@ -372,43 +397,49 @@
 }
 .ispu-scale__marker {
   position: absolute;
-  top: -30px;
+  bottom: -5px;
   transform: translateX(-50%);
   display: grid;
   justify-items: center;
+  pointer-events: none;
 }
 .ispu-scale__marker b {
   font-family: var(--font-display);
   background: var(--deep-ocean);
   color: var(--cloud);
-  padding: 1px 9px;
+  padding: 2px 10px;
   border-radius: var(--r-pill);
   font-size: var(--fs-sm);
+  line-height: 1.4;
+  box-shadow: 0 3px 10px rgba(7, 59, 76, 0.25);
 }
 .ispu-scale__marker::after {
   content: '';
   width: 3px;
-  height: 26px;
+  height: 22px;
+  margin-top: 2px;
   background: var(--deep-ocean);
   border-radius: 3px;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.85);
 }
 .ispu-scale__legend {
   list-style: none;
   margin: var(--s-4) 0 0;
   padding: 0;
   display: grid;
-  gap: 6px;
+  gap: 2px;
   font-size: var(--fs-sm);
 }
 .ispu-scale__legend li {
   display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 4px 8px;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
   border-radius: var(--r-sm);
+  transition: background var(--t-fast);
 }
 .ispu-scale__legend li.is-current {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.85);
   box-shadow: var(--shadow-sm);
 }
 .ispu-scale__legend i {
@@ -416,10 +447,23 @@
   height: 12px;
   border-radius: 4px;
   flex: none;
-  margin-top: 5px;
 }
-.ispu-scale__legend span {
+.ispu-scale__name {
   display: grid;
+  flex: 1;
+  min-width: 0;
+}
+.ispu-scale__range {
+  flex: none;
+  color: var(--ink-mute);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.ispu-scale--advice .ispu-scale__legend li {
+  align-items: flex-start;
+}
+.ispu-scale--advice .ispu-scale__legend i {
+  margin-top: 5px;
 }
 .ispu-scale__legend small {
   color: var(--ink-soft);
@@ -930,14 +974,63 @@
   flex: 1;
 }
 .connection__progress span {
+  position: relative;
   flex: 1;
   height: 6px;
   border-radius: 6px;
   background: var(--line);
+  overflow: hidden;
   transition: background var(--t-med);
 }
 .connection__progress span.is-done {
   background: var(--lagoon);
+}
+.connection__progress span i {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--lagoon);
+}
+/* While playing, the current segment fills up as a countdown to the next step. */
+.connection__progress.is-playing span i {
+  background: var(--coral);
+  transform-origin: left center;
+  animation: step-fill var(--step-ms, 4s) linear forwards;
+}
+@keyframes step-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.connection__count {
+  flex: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.diagram.is-playing .diagram__marker.is-active {
+  animation: marker-pulse 1.4s var(--ease-out) infinite;
+}
+@keyframes marker-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 146, 126, 0.7), 0 4px 12px rgba(7, 59, 76, 0.35);
+  }
+  100% {
+    box-shadow: 0 0 0 16px rgba(255, 146, 126, 0), 0 4px 12px rgba(7, 59, 76, 0.35);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .connection__progress.is-playing span i {
+    animation: none;
+  }
+  .diagram.is-playing .diagram__marker.is-active {
+    animation: none;
+  }
 }
 .connection__side {
   display: grid;
@@ -1051,24 +1144,6 @@
   color: var(--ink-soft);
 }
 
-/* ---------- 6. Map ---------- */
-.map-section {
-  background: linear-gradient(180deg, var(--sky-soft) 0%, var(--sea-foam) 100%);
-  padding-top: calc(var(--s-9) + 30px);
-  padding-bottom: calc(var(--s-9) + 40px);
-}
-.map-section__head {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: var(--s-5);
-  margin-bottom: var(--s-6);
-  flex-wrap: wrap;
-}
-.map-section__head .section-heading {
-  margin-bottom: 0;
-}
-
 /* ---------- 7. Action ---------- */
 .action-section {
   background: linear-gradient(180deg, var(--lagoon) 0%, var(--ocean-teal) 35%, var(--deep-ocean) 75%, var(--abyss) 100%);
@@ -1142,21 +1217,31 @@
   background: var(--coral);
   border-color: var(--coral);
 }
+/* Pledge reef: the single seabed at the bottom of the home page. It spans the
+   full width and fades into the footer, which hides its own sand here. */
+.action-section:has(.action-reef) {
+  padding-bottom: 0;
+}
 .action-reef {
   position: relative;
-  height: 220px;
+  height: 240px;
   margin-top: var(--s-6);
+  max-width: 1440px;
+  margin-inline: auto;
 }
 .action-reef::after {
   content: '';
   position: absolute;
-  left: -10%;
-  right: -10%;
+  left: 50%;
   bottom: 0;
-  height: 50px;
-  border-radius: 50% 50% 0 0 / 30px 30px 0 0;
-  background: var(--sand);
-  opacity: 0.85;
+  width: 100vw;
+  transform: translateX(-50%);
+  height: 70px;
+  border-radius: 50% 50% 0 0 / 34px 34px 0 0;
+  background: linear-gradient(180deg, var(--sand) 0%, #d8b97f 45%, #6f6a55 75%, var(--abyss) 100%);
+}
+.action-reef .swim {
+  left: 0;
 }
 .action-reef__coral {
   position: absolute;

@@ -4,12 +4,11 @@ import Logo from '../brand/Logo.jsx';
 import './Navbar.css';
 
 export const NAV_ITEMS = [
-  { to: '/', label: 'Beranda', end: true },
-  { to: '/air', label: 'Udara' },
-  { to: '/ocean', label: 'Laut' },
-  { to: '/explore', label: 'Jelajahi' },
-  { to: '/insights', label: 'Wawasan' },
-  { to: '/about', label: 'Tentang' },
+  { to: '/', label: 'Home', end: true },
+  { to: '/air', label: 'Air' },
+  { to: '/ocean', label: 'Ocean' },
+  { to: '/insights', label: 'Insights' },
+  { to: '/about', label: 'About' },
 ];
 
 export default function Navbar() {
@@ -55,8 +54,8 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <Link to="/explore" className="btn btn--sm nav__cta">
-          Buka peta
+        <Link to="/map" target="_blank" rel="noopener noreferrer" className="btn btn--sm nav__cta">
+          Open map
         </Link>
 
         <button
@@ -84,6 +83,16 @@ export default function Navbar() {
             {item.label}
           </NavLink>
         ))}
+        <Link
+          to="/map"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn nav__mobile-cta"
+          style={{ '--i': NAV_ITEMS.length }}
+          onClick={() => setOpen(false)}
+        >
+          Open map
+        </Link>
       </nav>
     </header>
   );

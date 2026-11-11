@@ -4,7 +4,6 @@ import DataExplorer from '../components/data/DataExplorer.jsx';
 import ParamCard from '../components/data/ParamCard.jsx';
 import IspuScale from '../components/data/IspuScale.jsx';
 import StationCard from '../components/data/StationCard.jsx';
-import EnvMap from '../components/map/EnvMap.jsx';
 import DemoBadge from '../components/ui/DemoBadge.jsx';
 import { SectionHeading } from '../components/ui/Basics.jsx';
 import { AIR_PARAMETERS } from '../data/parameters.js';
@@ -95,7 +94,7 @@ export default function AirPage() {
             ))}
           </ol>
           <div className="card ispu-advice" data-reveal>
-            <h3>Arti setiap kategori</h3>
+            <h3>What each category means</h3>
             <IspuScale value={current?.values.ispu.value} showAdvice />
             <p className="tiny muted">
               Kategori mengikuti PermenLHK P.14/2020. SEAIR menghitung ISPU ilustrasi hanya dari nilai demo PM2.5 dan PM10.
@@ -122,13 +121,6 @@ export default function AirPage() {
         <div className="container">
           <SectionHeading eyebrow="History" title="Trends and comparisons" />
           <DataExplorer fixedDomain="air" key={sel} initialStation={sel} />
-        </div>
-      </section>
-
-      <section className="section section--tight">
-        <div className="container">
-          <SectionHeading eyebrow="Measurement locations" title="Where the air is measured" />
-          <EnvMap initialLayer="air" height={480} />
         </div>
       </section>
     </div>

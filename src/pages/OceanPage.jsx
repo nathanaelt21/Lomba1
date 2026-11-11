@@ -3,7 +3,6 @@ import PageHero from '../components/layout/PageHero.jsx';
 import DataExplorer from '../components/data/DataExplorer.jsx';
 import OceanScene from '../components/data/OceanScene.jsx';
 import StationCard from '../components/data/StationCard.jsx';
-import EnvMap from '../components/map/EnvMap.jsx';
 import DemoBadge from '../components/ui/DemoBadge.jsx';
 import Icon from '../components/ui/Icon.jsx';
 import { BarChart } from '../components/charts/Charts.jsx';
@@ -174,13 +173,6 @@ export default function OceanPage() {
         <div className="container">
           <SectionHeading eyebrow="History" title="Trends and comparisons" />
           <DataExplorer fixedDomain="ocean" key={station + param} initialStation={station} initialParam={param} />
-        </div>
-      </section>
-
-      <section className="section section--tight">
-        <div className="container">
-          <SectionHeading eyebrow="Sampling points" title="Where the water is measured" />
-          <EnvMap initialLayer="ocean" height={480} />
         </div>
       </section>
     </div>

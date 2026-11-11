@@ -6,7 +6,6 @@ import AirSection from '../sections/home/AirSection.jsx';
 import OceanSection from '../sections/home/OceanSection.jsx';
 import DataSection from '../sections/home/DataSection.jsx';
 import ConnectionSection from '../sections/home/ConnectionSection.jsx';
-import MapSection from '../sections/home/MapSection.jsx';
 import ActionSection from '../sections/home/ActionSection.jsx';
 
 export default function Home() {
@@ -20,7 +19,6 @@ export default function Home() {
       <OceanSection />
       <DataSection />
       <ConnectionSection />
-      <MapSection />
       <ActionSection />
     </div>
   );

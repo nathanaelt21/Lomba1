@@ -168,8 +168,8 @@ export default function AboutPage() {
             <a href="mailto:hello@seair.example" className="btn btn--coral">
               hello@seair.example
             </a>
-            <Link to="/explore" className="btn btn--ghost">
-              Jelajahi peta
+            <Link to="/map" target="_blank" rel="noopener noreferrer" className="btn btn--ghost">
+              Open map
             </Link>
           </div>
         </div>

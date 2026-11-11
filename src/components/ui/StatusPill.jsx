@@ -26,11 +26,11 @@ export default function StatusPill({ airStation = 'priok-air', seaStation = 'anc
       </span>
       <span className="status-pill__item">
         <i style={{ background: cat.color }} />
-        Udara · ISPU {ispu} <b>{cat.id}</b>
+        Air · ISPU {ispu} <b>{cat.id}</b>
       </span>
       <span className="status-pill__item">
         <i className={`dot-${doStatus}`} />
-        Laut · Oksigen {formatValue(doVal, 1)} mg/L
+        Ocean · Oxygen {formatValue(doVal, 1)} mg/L
       </span>
       <span className="status-pill__time">{formatDateTime(air.t)}</span>
       <DemoBadge compact />

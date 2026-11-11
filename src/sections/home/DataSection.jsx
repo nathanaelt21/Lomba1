@@ -20,9 +20,9 @@ export default function DataSection() {
           <DataExplorer />
         </Deferred>
         <p className="data-section__more" data-reveal>
-          Ingin tahu bagaimana udara dan laut berubah bersama?{' '}
+          Curious how air and ocean shift together?{' '}
           <Link to="/insights">
-            Baca wawasannya <Icon name="arrow" size={16} />
+            Read the insights <Icon name="arrow" size={16} />
           </Link>
         </p>
       </div>

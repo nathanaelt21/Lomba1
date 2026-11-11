@@ -8,35 +8,35 @@ const ACTIONS = [
   {
     key: 'awareness',
     icon: 'info',
-    title: 'Tetap waspada',
+    title: 'Stay aware',
     text: 'Cek kualitas udara sebelum beraktivitas di luar, dan pahami arti angka-angkanya untuk keluarga Anda.',
     pledge: 'Saya akan cek ISPU sebelum lama beraktivitas di luar',
   },
   {
     key: 'habits',
     icon: 'leaf',
-    title: 'Kebiasaan ramah lingkungan',
+    title: 'Greener habits',
     text: 'Jalan kaki, bersepeda, atau naik transportasi umum untuk jarak dekat. Makin sedikit mesin menyala, makin sedikit NO₂ dan PM2.5 yang melayang ke teluk.',
     pledge: 'Saya akan mengganti satu perjalanan mobil/motor tiap minggu',
   },
   {
     key: 'coast',
     icon: 'shield',
-    title: 'Lindungi pesisir',
+    title: 'Protect the coast',
     text: 'Mangrove dan lamun menahan lumpur, menjadi rumah bagi anak ikan, dan meredam ombak. Dukung pemulihan pesisir di sekitar Anda.',
     pledge: 'Saya akan ikut atau mendukung penanaman mangrove',
   },
   {
     key: 'pollution',
     icon: 'recycle',
-    title: 'Kurangi polusi',
+    title: 'Cut the pollution',
     text: 'Jangan membakar sampah, pilah sampah Anda, dan jauhkan plastik serta minyak dari selokan, karena selokan bermuara ke sungai dan sungai bermuara ke laut.',
     pledge: 'Saya tidak akan membakar sampah di tempat terbuka',
   },
   {
     key: 'community',
     icon: 'people',
-    title: 'Bergabung dengan komunitas',
+    title: 'Join the community',
     text: 'Ikut aksi bersih pantai dan sains warga, lalu bagikan apa yang Anda pelajari kepada tetangga dan sekolah.',
     pledge: 'Saya akan ikut bersih-bersih pantai atau membagikan SEAIR',
   },
@@ -59,7 +59,7 @@ export default function ActionSection() {
 
   return (
     <section id="action" className="section action-section on-dark">
-      <WaveDivider position="top" fill="var(--sea-foam)" flip />
+      <WaveDivider position="top" fill="var(--cloud)" flip />
       <Bubbles count={16} seed={21} />
       <div className="container">
         <SectionHeading eyebrow="Take action" title="Small actions, rising together" align="center">
@@ -85,22 +85,6 @@ export default function ActionSection() {
           })}
         </div>
 
-        <div className="action-reef" aria-hidden="true">
-          {CORALS.map(({ C, props, left, w }, i) => (
-            <div key={i} className={`action-reef__coral ${i < n ? 'is-grown' : ''}`} style={{ left, width: w }}>
-              <C {...props} />
-            </div>
-          ))}
-          <Seaweed className="action-reef__weed" color="#087E8B" height={140} />
-          <div className="swim" style={{ top: '10%', '--dur': '22s' }}>
-            <Fish color="sand" style={{ width: 56 }} />
-          </div>
-          {n === ACTIONS.length && (
-            <div className="swim swim--left" style={{ top: '30%', '--dur': '16s' }}>
-              <Fish color="coral" style={{ width: 70 }} />
-            </div>
-          )}
-        </div>
         <p className="action-count" aria-live="polite">
           {n === 0
             ? 'Pilih satu janji untuk mulai menumbuhkan terumbu Anda.'
@@ -110,13 +94,30 @@ export default function ActionSection() {
         </p>
 
         <div className="action-cta">
-          <Link to="/explore" className="btn btn--coral">
-            Jelajahi pesisirmu <Icon name="arrow" size={18} />
+          <Link to="/map" target="_blank" rel="noopener noreferrer" className="btn btn--coral">
+            Open map <Icon name="arrow" size={18} />
           </Link>
           <Link to="/about" className="btn btn--ghost">
-            Tentang SEAIR
+            About SEAIR
           </Link>
         </div>
+      </div>
+      {/* The one seabed at the bottom of the page: it overlays into the footer. */}
+      <div className="action-reef" aria-hidden="true">
+        {CORALS.map(({ C, props, left, w }, i) => (
+          <div key={i} className={`action-reef__coral ${i < n ? 'is-grown' : ''}`} style={{ left, width: w }}>
+            <C {...props} />
+          </div>
+        ))}
+        <Seaweed className="action-reef__weed" color="#087E8B" height={140} />
+        <div className="swim" style={{ top: '10%', '--dur': '22s' }}>
+          <Fish color="sand" style={{ width: 56 }} />
+        </div>
+        {n === ACTIONS.length && (
+          <div className="swim swim--left" style={{ top: '30%', '--dur': '16s' }}>
+            <Fish color="coral" style={{ width: 70 }} />
+          </div>
+        )}
       </div>
     </section>
   );

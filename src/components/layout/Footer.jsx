@@ -27,7 +27,7 @@ export default function Footer() {
         </div>
 
         <nav className="footer__col" aria-label="Navigasi bawah">
-          <h3>Navigasi</h3>
+          <h3>Navigate</h3>
           <ul>
             {NAV_ITEMS.map((n) => (
               <li key={n.to}>
@@ -38,7 +38,7 @@ export default function Footer() {
         </nav>
 
         <div className="footer__col">
-          <h3>Sumber data</h3>
+          <h3>Data sources</h3>
           <ul>
             {DATA_SOURCES.map((s) => (
               <li key={s.id}>
@@ -56,23 +56,23 @@ export default function Footer() {
         </div>
 
         <div className="footer__col">
-          <h3>Kontak</h3>
+          <h3>Contact</h3>
           <ul>
             <li>
               <a href="mailto:hello@seair.example">hello@seair.example</a>
             </li>
             <li>
-              <Link to="/about#methodology">Metodologi</Link>
+              <Link to="/about#methodology">Methodology</Link>
             </li>
             <li>
-              <Link to="/about#integrity">Integritas data</Link>
+              <Link to="/about#integrity">Data integrity</Link>
             </li>
           </ul>
         </div>
       </div>
       <div className="container footer__bottom">
         <span>© {new Date().getFullYear()} SEAIR · Sky to Sea</span>
-        <span>Fokus prototipe: Teluk Jakarta, Indonesia</span>
+        <span>Prototype focus: Teluk Jakarta, Indonesia</span>
       </div>
     </footer>
   );

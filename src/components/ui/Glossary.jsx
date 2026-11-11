@@ -100,7 +100,7 @@ export default function Glossary() {
         aria-expanded={open}
       >
         <Icon name="book" size={20} />
-        <span>Kamus istilah</span>
+        <span>Glossary</span>
       </button>
 
       <div className={`glossary ${open ? 'is-open' : ''}`} aria-hidden={!open}>
@@ -115,7 +115,7 @@ export default function Glossary() {
         >
           <div className="glossary__head">
             <div>
-              <h2 id="glossary-title">Kamus Istilah</h2>
+              <h2 id="glossary-title">Glossary</h2>
               <p className="small muted">Penjelasan sederhana untuk istilah, satuan, dan angka di SEAIR.</p>
             </div>
             <button type="button" className="glossary__close" onClick={close} aria-label="Tutup kamus">

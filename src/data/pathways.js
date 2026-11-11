@@ -6,7 +6,7 @@
 export const PATHWAYS = [
   {
     key: 'emission',
-    title: 'Emisi',
+    title: 'Emission',
     icon: 'factory',
     summary: 'Kendaraan, pelabuhan, pembangkit listrik, dan industri di sepanjang pesisir melepaskan gas dan partikel ke udara.',
     detail:
@@ -17,7 +17,7 @@ export const PATHWAYS = [
   },
   {
     key: 'transport',
-    title: 'Terbawa angin',
+    title: 'Carried by wind',
     icon: 'wind',
     summary: 'Angin membawa polutan menjauh dari sumbernya, kadang sampai ke atas laut.',
     detail:
@@ -28,7 +28,7 @@ export const PATHWAYS = [
   },
   {
     key: 'deposition',
-    title: 'Pengendapan',
+    title: 'Deposition',
     icon: 'rain',
     summary: 'Partikel jatuh sendiri (pengendapan kering) atau terbawa hujan (pengendapan basah) ke permukaan air.',
     detail:
@@ -39,7 +39,7 @@ export const PATHWAYS = [
   },
   {
     key: 'exchange',
-    title: 'Pertukaran gas udara–laut',
+    title: 'Air–sea gas exchange',
     icon: 'bubble',
     summary: 'CO₂ dan oksigen berpindah melewati permukaan laut. Laut menyerap CO₂, yang perlahan menurunkan pH.',
     detail:
@@ -50,7 +50,7 @@ export const PATHWAYS = [
   },
   {
     key: 'runoff',
-    title: 'Limpasan',
+    title: 'Runoff',
     icon: 'river',
     summary: 'Hujan membilas polutan yang mengendap di darat ke sungai, lalu sungai mengalirkannya ke teluk.',
     detail:
@@ -61,7 +61,7 @@ export const PATHWAYS = [
   },
   {
     key: 'response',
-    title: 'Dampak di laut',
+    title: 'Marine impact',
     icon: 'fish',
     summary: 'Nutrien berlebih bisa memicu ledakan alga. Saat alga membusuk, oksigen turun dan karang serta ikan menjadi stres.',
     detail:

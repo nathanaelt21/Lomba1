@@ -224,10 +224,6 @@
   color: var(--ocean-teal);
 }
 
-/* Explore page */
-.explore-page {
-  padding-top: var(--s-6);
-}
 .tips {
   list-style: none;
   margin: var(--s-6) 0 var(--s-3);

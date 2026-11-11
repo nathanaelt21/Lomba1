@@ -4,9 +4,9 @@ import Icon from '../../components/ui/Icon.jsx';
 import { WaveDivider } from '../../components/ui/Basics.jsx';
 
 const LINKS = [
-  { icon: 'bubble', title: 'Pertukaran gas', text: 'Oksigen dan CO₂ berpindah bolak-balik melewati permukaan laut.' },
-  { icon: 'dust', title: 'Pengendapan', text: 'Partikel, nitrogen, dan logam di udara jatuh sendiri atau terbawa hujan ke permukaan air.' },
-  { icon: 'sun', title: 'Panas & uap air', text: 'Udara dan laut saling bertukar panas dan uap air, yang menggerakkan angin muson dan cuaca.' },
+  { icon: 'bubble', title: 'Gas exchange', text: 'Oksigen dan CO₂ berpindah bolak-balik melewati permukaan laut.' },
+  { icon: 'dust', title: 'Deposition', text: 'Partikel, nitrogen, dan logam di udara jatuh sendiri atau terbawa hujan ke permukaan air.' },
+  { icon: 'sun', title: 'Heat & moisture', text: 'Udara dan laut saling bertukar panas dan uap air, yang menggerakkan angin muson dan cuaca.' },
 ];
 
 export default function TwoWorlds() {
@@ -40,9 +40,9 @@ export default function TwoWorlds() {
             </div>
             <div className="split__body">
               <span className="split__tag">
-                <Icon name="wind" size={18} /> Atmosfer
+                <Icon name="wind" size={18} /> Atmosphere
               </span>
-              <h3>Udara yang kita hirup</h3>
+              <h3>The air we breathe</h3>
               <ul>
                 <li>Lapisan tipis gas yang membawa panas, uap air, dan polutan melintasi wilayah yang luas.</li>
                 <li>Angin bisa membawa emisi dari kota, pelabuhan, dan industri jauh sampai ke atas laut.</li>
@@ -75,9 +75,9 @@ export default function TwoWorlds() {
             </div>
             <div className="split__body">
               <span className="split__tag">
-                <Icon name="wave" size={18} /> Lautan
+                <Icon name="wave" size={18} /> Ocean
               </span>
-              <h3>Laut yang kita jaga bersama</h3>
+              <h3>The ocean we share</h3>
               <ul>
                 <li>Laut telah menyerap lebih dari 90% kelebihan panas yang terperangkap oleh gas rumah kaca.</li>
                 <li>Laut menyerap sebagian besar emisi CO₂ manusia, yang perlahan menurunkan pH air laut.</li>

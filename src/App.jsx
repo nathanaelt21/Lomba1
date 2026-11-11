@@ -1,5 +1,5 @@
 import { Suspense, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { ScrollTrigger } from './animations/gsap.js';
 import Navbar from './components/layout/Navbar.jsx';
 import Footer from './components/layout/Footer.jsx';
@@ -11,7 +11,7 @@ import { lazyWithReload as lazy, clearChunkReloadFlag } from './utils/lazyWithRe
 // Secondary pages are split into their own chunks.
 const AirPage = lazy(() => import('./pages/AirPage.jsx'));
 const OceanPage = lazy(() => import('./pages/OceanPage.jsx'));
-const ExplorePage = lazy(() => import('./pages/ExplorePage.jsx'));
+const MapPage = lazy(() => import('./pages/MapPage.jsx'));
 const InsightsPage = lazy(() => import('./pages/InsightsPage.jsx'));
 const AboutPage = lazy(() => import('./pages/AboutPage.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound.jsx'));
@@ -60,6 +60,17 @@ export default function App() {
     const id = setTimeout(clearChunkReloadFlag, 5000);
     return () => clearTimeout(id);
   }, []);
+
+  // The map is a standalone full-screen page (opened in a new tab): no
+  // navbar, footer or scroll helpers around it.
+  if (location.pathname.replace(/\/+$/, '') === '/map') {
+    return (
+      <Suspense fallback={<PageFallback />}>
+        <MapPage />
+      </Suspense>
+    );
+  }
+
   return (
     <>
       <a href="#main" className="skip-link">
@@ -76,7 +87,8 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/air" element={<AirPage />} />
             <Route path="/ocean" element={<OceanPage />} />
-            <Route path="/explore" element={<ExplorePage />} />
+            {/* Old Explore URL now lands on the full-screen map. */}
+            <Route path="/explore" element={<Navigate to="/map" replace />} />
             <Route path="/insights" element={<InsightsPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="*" element={<NotFound />} />

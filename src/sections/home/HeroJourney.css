@@ -119,6 +119,10 @@
 .world-surface__canvas {
   width: 100%;
   height: 100%;
+  /* Dissolve the flat wave fill into the underwater gradient and light rays
+     below it, instead of ending on a hard horizontal edge. */
+  -webkit-mask-image: linear-gradient(180deg, #000 0 70%, rgba(0, 0, 0, 0.55) 86%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0 70%, rgba(0, 0, 0, 0.55) 86%, transparent 100%);
 }
 .world-floater {
   position: absolute;
@@ -177,9 +181,33 @@
   left: -5%;
   right: -5%;
   height: 90px;
-  background: var(--sand);
+  background: linear-gradient(180deg, var(--sand) 0%, #d8b97f 38%, #6f6a55 72%, var(--abyss) 100%);
   border-radius: 50% 50% 0 0 / 60px 60px 0 0;
-  box-shadow: inset 0 14px 0 rgba(255, 255, 255, 0.25);
+  box-shadow: inset 0 10px 0 rgba(255, 255, 255, 0.22);
+}
+.reef-sand::before {
+  /* scattered pebbles so the seabed isn't a flat slab */
+  content: '';
+  position: absolute;
+  inset: 16px 0 auto;
+  height: 30px;
+  background:
+    radial-gradient(circle at 8% 40%, rgba(7, 59, 76, 0.22) 0 4px, transparent 5px),
+    radial-gradient(circle at 23% 70%, rgba(7, 59, 76, 0.16) 0 3px, transparent 4px),
+    radial-gradient(circle at 47% 30%, rgba(7, 59, 76, 0.2) 0 5px, transparent 6px),
+    radial-gradient(circle at 61% 65%, rgba(7, 59, 76, 0.16) 0 3px, transparent 4px),
+    radial-gradient(circle at 79% 45%, rgba(7, 59, 76, 0.2) 0 4px, transparent 5px),
+    radial-gradient(circle at 93% 70%, rgba(7, 59, 76, 0.16) 0 3px, transparent 4px);
+}
+.world-reef::after {
+  /* soft fade at the very bottom: no hard seam into the next section */
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 36px;
+  z-index: 3;
+  background: linear-gradient(180deg, rgba(4, 41, 58, 0), var(--abyss));
+  pointer-events: none;
 }
 .reef-rock--1 {
   left: -2%;
@@ -359,17 +387,21 @@
   border: 1px solid rgba(255, 255, 255, 0.6);
   font-family: var(--font-display);
   color: var(--deep-ocean);
-  width: 74px;
+  width: 82px;
+  box-shadow: 0 8px 24px rgba(4, 41, 58, 0.18);
 }
 .depth-gauge__label {
   font-size: 10px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  white-space: nowrap;
   opacity: 0.75;
 }
 .depth-gauge__value {
   font-size: 15px;
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 .depth-gauge__track {
   position: relative;
@@ -491,6 +523,28 @@
   .world-sun {
     right: 4%;
     top: 4%;
+  }
+}
+/* Without the scroll journey (reduced motion) the stage is a static screen
+   that ends in shallow teal water, right above the dark next section. Let the
+   water deepen into the abyss so the two blend instead of meeting at a seam. */
+@media (prefers-reduced-motion: reduce) {
+  .journey__stage::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 24%;
+    z-index: 4;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(4, 41, 58, 0) 0%,
+      rgba(4, 41, 58, 0.1) 20%,
+      rgba(4, 41, 58, 0.32) 42%,
+      rgba(4, 41, 58, 0.62) 64%,
+      rgba(4, 41, 58, 0.88) 84%,
+      var(--abyss) 100%
+    );
   }
 }
 @media (max-height: 820px) and (min-width: 721px) {

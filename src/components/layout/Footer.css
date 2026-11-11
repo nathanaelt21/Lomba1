@@ -21,6 +21,14 @@
   opacity: 0.9;
   border-radius: 50% 50% 0 0 / 40px 40px 0 0;
 }
+/* On the home page the pledge reef above already draws the seabed, so the
+   footer drops its own sand: one seabed, not two stacked. */
+body:has(.action-reef) .footer {
+  padding-top: 0;
+}
+body:has(.action-reef) .footer__seabed {
+  display: none;
+}
 .footer__seabed > svg {
   position: absolute;
   bottom: 30px;

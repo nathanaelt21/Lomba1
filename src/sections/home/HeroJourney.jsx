@@ -124,10 +124,10 @@ export default function HeroJourney() {
         let label;
         let value;
         if (p < WATERLINE) {
-          label = 'Ketinggian';
+          label = 'Altitude';
           value = `${Math.round((1 - p / WATERLINE) * 120)} m`;
         } else {
-          label = 'Kedalaman';
+          label = 'Depth';
           value = `${Math.round(((p - WATERLINE) / (1 - WATERLINE)) * 18)} m`;
         }
         if (gaugeLabel.current) gaugeLabel.current.textContent = label;
@@ -176,7 +176,7 @@ export default function HeroJourney() {
   const setFloaters = (engine) =>
     engine.setFloaters([
       { el: boatRef.current, x: 0.2, layer: 2, sink: 0.82 },
-      { el: buoyRef.current, x: 0.74, layer: 1, sink: 0.72 },
+      { el: buoyRef.current, x: 0.84, layer: 1, sink: 0.72 },
     ]);
 
   const dive = () => {
@@ -186,7 +186,7 @@ export default function HeroJourney() {
   };
 
   return (
-    <section className="journey" ref={root} aria-label="SEAIR: dari langit sampai ke laut dalam">
+    <section className="journey" ref={root} aria-label="SEAIR: from the sky to the deep sea">
       <div
         className="journey__stage"
         ref={stage}
@@ -224,7 +224,7 @@ export default function HeroJourney() {
           <div className="world-horizon">
             <div className="world-horizon__inner">
               <Skyline />
-              <Hotspot title="Emisi pesisir" placement="top" style={{ left: '20.4%', top: '30%' }}>
+              <Hotspot title="Coastal emissions" placement="top" style={{ left: '72.2%', top: '34%' }}>
                 Industri, pelabuhan, dan lalu lintas di pesisir Jakarta melepaskan gas dan partikel. Angin bisa membawanya sampai
                 ke atas teluk.
               </Hotspot>
@@ -258,11 +258,11 @@ export default function HeroJourney() {
                 <BranchCoral className="reef-coral reef-coral--2" color="#F4D6A0" tip="#FCEBCB" />
                 <Seaweed className="reef-weed reef-weed--2" color="#18A6A6" height={190} />
                 <Seaweed className="reef-weed reef-weed--3" color="#70D6CE" height={140} blades={2} />
-                <Hotspot title="Terumbu karang" tone="dark" placement="top" style={{ left: '17%', bottom: '170px' }}>
+                <Hotspot title="Coral reef" tone="dark" placement="top" style={{ left: '17%', bottom: '170px' }}>
                   Karang hanya bisa hidup pada rentang suhu, pH, dan kejernihan air yang sempit. Karang termasuk yang paling
                   awal merasakan perubahan di udara dan laut.
                 </Hotspot>
-                <Hotspot title="Oksigen untuk ikan" tone="dark" placement="top" style={{ left: '63%', bottom: '230px' }}>
+                <Hotspot title="Oxygen for fish" tone="dark" placement="top" style={{ left: '63%', bottom: '230px' }}>
                   Ikan bernapas dengan oksigen terlarut. Di bawah sekitar 5 mg/L, banyak biota laut mulai stres.
                 </Hotspot>
               </div>
@@ -274,13 +274,13 @@ export default function HeroJourney() {
             <EngineCanvas Engine={WaveSurface} ref={waveRef} className="world-surface__canvas" onReady={setFloaters} />
             <div className="world-floater" ref={boatRef} style={{ left: '20%' }}>
               <Boat />
-              <Hotspot title="Mata pencaharian pesisir" placement="top" style={{ left: '50%', top: '-6px' }}>
+              <Hotspot title="Coastal livelihoods" placement="top" style={{ left: '50%', top: '-6px' }}>
                 Nelayan di sekitar Teluk Jakarta bergantung pada air yang bersih dan sehat untuk pangan dan penghasilan mereka.
               </Hotspot>
             </div>
-            <div className="world-floater world-floater--buoy" ref={buoyRef} style={{ left: '74%' }}>
+            <div className="world-floater world-floater--buoy" ref={buoyRef} style={{ left: '84%' }}>
               <Buoy />
-              <Hotspot title="Pemantauan laut" placement="top" style={{ left: '50%', top: '-8px' }}>
+              <Hotspot title="Ocean monitoring" placement="top" style={{ left: '50%', top: '-8px' }}>
                 Pelampung dan stasiun sampel mengukur pH, oksigen, salinitas, dan suhu. Pelampung ini hanya ilustrasi.
               </Hotspot>
             </div>
@@ -299,24 +299,24 @@ export default function HeroJourney() {
           <p className="journey__lede">Temukan hubungan antara udara yang kita hirup dan laut yang kita jaga bersama.</p>
           <div className="journey__actions">
             <a href="#data" className="btn">
-              Jelajahi data
+              Explore the data
               <svg viewBox="0 0 20 20" aria-hidden="true">
                 <path d="M4 10h12m-5-5 5 5-5 5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </a>
-            <Link to="/explore" className="btn btn--ghost">
-              Buka peta
+            <Link to="/map" target="_blank" rel="noopener noreferrer" className="btn btn--ghost">
+              Open the map
             </Link>
           </div>
           <p className="journey__hint">
-            <span>Klik langit untuk hembusan angin</span>
-            <span>Klik atau seret laut untuk membuat ombak</span>
+            <span>Tap the sky for a gust of wind</span>
+            <span>Tap or drag the sea to make waves</span>
           </p>
         </div>
 
         <div className="journey__caption caption-1" aria-hidden="true">
           <span className="eyebrow">Sea level · 0 m</span>
-          <p>Melintasi permukaan laut</p>
+          <p>Crossing the surface</p>
         </div>
         <div className="journey__caption caption-2">
           <span className="eyebrow">The Deep Blue</span>
@@ -326,7 +326,7 @@ export default function HeroJourney() {
 
         <div className="depth-gauge" aria-hidden="true">
           <span className="depth-gauge__label" ref={gaugeLabel}>
-            Ketinggian
+            Altitude
           </span>
           <span className="depth-gauge__value" ref={gaugeValue}>
             120 m
@@ -341,7 +341,7 @@ export default function HeroJourney() {
           <span className="journey__cue-mouse" aria-hidden="true">
             <span />
           </span>
-          Gulir untuk menyelam
+          Scroll to dive
         </button>
       </div>
     </section>

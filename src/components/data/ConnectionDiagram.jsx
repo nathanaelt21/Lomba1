@@ -15,9 +15,9 @@ const MARKERS = {
  * Elements carry `dg--<step>` classes; the active step stays bright and the
  * rest dim.
  */
-export default function ConnectionDiagram({ active, onSelect }) {
+export default function ConnectionDiagram({ active, onSelect, playing = false }) {
   return (
-    <div className="diagram" data-active={active}>
+    <div className={`diagram ${playing ? 'is-playing' : ''}`} data-active={active}>
       <svg viewBox="0 0 1000 560" role="img" aria-label="Diagram perjalanan polutan dari kota pesisir, melalui udara, hingga masuk ke Teluk Jakarta">
         <defs>
           <linearGradient id="dg-sky" x1="0" y1="0" x2="0" y2="1">
@@ -130,8 +130,8 @@ export default function ConnectionDiagram({ active, onSelect }) {
             ))}
           </g>
           <ellipse cx="610" cy="470" rx="90" ry="40" fill="none" stroke="#FF927E" strokeWidth="3" strokeDasharray="6 6" />
-          <text x="560" y="474" className="dg-label dg-label--coral">
-            O₂ rendah
+          <text x="610" y="476" textAnchor="middle" className="dg-label dg-label--coral">
+            Low O₂
           </text>
           <g transform="translate(740 420)">
             <path d="M0 14 C8 0 34 -2 46 12 C34 28 8 28 0 14z" fill="#FF927E" />
@@ -157,7 +157,7 @@ export default function ConnectionDiagram({ active, onSelect }) {
             className={`diagram__marker ${active === p.key ? 'is-active' : ''}`}
             style={{ left: `${x / 10}%`, top: `${(y / 560) * 100}%` }}
             onClick={() => onSelect(p.key)}
-            aria-label={`Langkah ${i + 1}: ${p.title}`}
+            aria-label={`Step ${i + 1}: ${p.title}`}
             aria-pressed={active === p.key}
           >
             {i + 1}

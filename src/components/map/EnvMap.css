@@ -4,6 +4,9 @@
   gap: var(--s-4);
   height: var(--map-h);
 }
+.envmap--full {
+  height: 100%;
+}
 .envmap__map {
   position: relative;
   border-radius: var(--r-lg);
@@ -281,6 +284,10 @@
   }
   .envmap__map {
     height: min(var(--map-h), 70vh);
+  }
+  .envmap--full .envmap__map {
+    height: 68vh;
+    height: 68dvh;
   }
   .envmap__toolbar {
     left: 50px;

@@ -59,10 +59,10 @@ export default function OceanSection() {
             <p className="param-card__simple">{p.simple}</p>
             <p>{p.what}</p>
             <p className="small">
-              <b>Mengapa penting:</b> {p.why}
+              <b>Why it matters:</b> {p.why}
             </p>
             <p className="small">
-              <b>Apa yang memengaruhinya:</b> {p.source}
+              <b>What affects it:</b> {p.source}
             </p>
 
             <div className="ocean-detail__compare">
@@ -71,7 +71,7 @@ export default function OceanSection() {
                   const val = l.values[sel].value;
                   return (
                     <div key={l.station.id} className="ocean-detail__site">
-                      <span className="tiny muted">{l.station.id === INNER ? 'Teluk bagian dalam' : 'Terumbu lepas pantai'}</span>
+                      <span className="tiny muted">{l.station.id === INNER ? 'Inner bay' : 'Offshore reef'}</span>
                       <b>{l.station.name}</b>
                       <span className="ocean-detail__val">
                         {formatValue(val, p.decimals)} <small>{p.unit}</small>
@@ -90,7 +90,7 @@ export default function OceanSection() {
               <DemoBadge />
             </div>
             <Link to="/ocean" className="btn btn--sm">
-              Pelajari kualitas laut <Icon name="arrow" size={16} />
+              Learn about ocean quality <Icon name="arrow" size={16} />
             </Link>
           </article>
         </div>
