@@ -14,6 +14,7 @@ import { getStation } from '../stations.js';
 import { hashString, smoothNoise, clamp } from '../../utils/random.js';
 import { illustrativeISPU } from '../../utils/ispu.js';
 import { wetness } from '../../utils/season.js';
+import { now } from '../../utils/clock.js';
 
 const HOUR = 3600e3;
 const DAY = 24 * HOUR;
@@ -82,7 +83,7 @@ export function demoValueAt(stationId, key, t, withCycle = false) {
 }
 
 /** Series of { t, v } points for a period ending at `end`. */
-export function demoSeries(stationId, key, period = '30d', end = Date.now()) {
+export function demoSeries(stationId, key, period = '30d', end = now()) {
   const cfg = PERIODS[period] || PERIODS['30d'];
   const endT = period === '7d' ? Math.floor(end / cfg.step) * cfg.step : Math.floor(end / DAY) * DAY;
   const startT = endT - cfg.days * DAY;

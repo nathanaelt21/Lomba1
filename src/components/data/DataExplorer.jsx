@@ -12,6 +12,7 @@ import { stationsFor, getStation } from '../../data/stations.js';
 import { summarize } from '../../utils/stats.js';
 import { formatDate, formatDateTime, formatSigned, toISODate } from '../../utils/format.js';
 import { downloadSeriesCsv } from '../../utils/csv.js';
+import { now } from '../../utils/clock.js';
 import './DataExplorer.css';
 
 const DEFAULT_STATION = { air: 'priok-air', ocean: 'ancol-sea' };
@@ -27,7 +28,7 @@ export default function DataExplorer({ fixedDomain, initialStation, initialParam
   const [stationId, setStationId] = useState(initialStation || DEFAULT_STATION[fixedDomain || 'air']);
   const [param, setParam] = useState(initialParam || DEFAULT_PARAM[fixedDomain || 'air']);
   const [period, setPeriod] = useState('30d');
-  const [endDate, setEndDate] = useState(() => toISODate(Date.now()));
+  const [endDate, setEndDate] = useState(() => toISODate(now()));
   const [compareId, setCompareId] = useState('');
 
   // Reset dependent selections when the domain changes.
@@ -49,10 +50,10 @@ export default function DataExplorer({ fixedDomain, initialStation, initialParam
   const paramMeta = getParameter(param);
   const station = getStation(stationId);
   const valid = station?.domain === domain && paramMeta?.domain === domain;
-  const today = toISODate(Date.now());
+  const today = toISODate(now());
   const end = useMemo(() => {
     const d = new Date(`${endDate}T23:00:00+07:00`).getTime();
-    return Number.isFinite(d) ? Math.min(d, Date.now()) : Date.now();
+    return Number.isFinite(d) ? Math.min(d, now()) : now();
   }, [endDate]);
 
   const { data, loading, error } = useAsync(async () => {
@@ -117,7 +118,7 @@ export default function DataExplorer({ fixedDomain, initialStation, initialParam
             type="date"
             value={endDate}
             max={today}
-            min={toISODate(Date.now() - 730 * 864e5)}
+            min={toISODate(now() - 730 * 864e5)}
             onChange={(e) => e.target.value && setEndDate(e.target.value)}
           />
         </label>

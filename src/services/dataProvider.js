@@ -21,6 +21,7 @@
 import { demoSeries, demoValueAt, PERIODS } from '../data/mock/demoGenerator.js';
 import { getParameter, parametersFor } from '../data/parameters.js';
 import { getStation, stationsFor, STATIONS } from '../data/stations.js';
+import { now } from '../utils/clock.js';
 
 const MODE = import.meta.env.VITE_DATA_MODE || 'demo';
 
@@ -30,7 +31,7 @@ const locationOf = (s) => ({ id: s.id, name: s.name, area: s.area, lat: s.lat, l
 const paramOf = (p) => ({ key: p.key, name: p.name, unit: p.unit, decimals: p.decimals });
 
 const demoAdapter = {
-  async series({ stationId, parameter, period = '30d', end = Date.now() }) {
+  async series({ stationId, parameter, period = '30d', end = now() }) {
     const station = getStation(stationId);
     const param = getParameter(parameter);
     if (!station || !param) throw new Error(`Unknown station/parameter: ${stationId}/${parameter}`);
@@ -38,7 +39,7 @@ const demoAdapter = {
     return {
       isDemo: true,
       source: DEMO_SOURCE,
-      retrievedAt: Date.now(),
+      retrievedAt: now(),
       location: locationOf(station),
       parameter: paramOf(param),
       period,
@@ -48,7 +49,7 @@ const demoAdapter = {
     };
   },
 
-  async latest(stationId, at = Date.now()) {
+  async latest(stationId, at = now()) {
     const station = getStation(stationId);
     if (!station) throw new Error(`Unknown station: ${stationId}`);
     const t = Math.floor(at / 3600e3) * 3600e3;
@@ -56,7 +57,7 @@ const demoAdapter = {
     parametersFor(station.domain).forEach((p) => {
       values[p.key] = { value: demoValueAt(stationId, p.key, t, true), unit: p.unit, t };
     });
-    return { isDemo: true, source: DEMO_SOURCE, retrievedAt: Date.now(), location: locationOf(station), station, values, t };
+    return { isDemo: true, source: DEMO_SOURCE, retrievedAt: now(), location: locationOf(station), station, values, t };
   },
 };
 
